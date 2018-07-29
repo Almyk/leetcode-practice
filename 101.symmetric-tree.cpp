@@ -16,16 +16,10 @@ public:
 private:
     bool symmetry(TreeNode* A, TreeNode* B){
         bool res;
-        if((A && B) && (A->val != B->val))
+        if(!A && !B) return true;
+        else if(!A || !B || A->val != B->val)
             return false;
-        else if(A && !B)
-            return false;
-        else if(!A && B)
-            return false;
-        else if(!A && !B) return true;
 
-        res = symmetry(A->left, B->right);
-        if(res) res = symmetry(A->right, B->left);
-        return res;
+        return symmetry(A->left, B->right) && symmetry(A->right, B->left);
     }
 };
